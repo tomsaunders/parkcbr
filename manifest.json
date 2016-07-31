@@ -19,5 +19,8 @@
 	"web_accessible_resources": [
 		"park.webp"
 	],
-	"manifest_version": 2
+	"manifest_version": 2,
+	"icons": {
+		"128": "park.png"
+	}
 }
