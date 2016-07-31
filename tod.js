@@ -88,32 +88,35 @@ setTimeout(function() {
 			rating = 'Poor';
 		}
 
+		var $dialog = $("<div id='dialog'></div>");
+		$dialog.addClass(status);
+
+		$dialog.append("<p><b>Parking rating: </b>" + rating + "</p>");
+
+		var $table = $('<table><thead><tr><th>Free Spaces</th><th class="location">Location</th><th>Type</th><th>Distance</th></tr></thead></table>').appendTo($dialog);
+
+		for (var i = 0; i < 10 && i < data.length; i++) {
+			var lot = data[i];
+			var url = "https://www.google.com.au/maps/dir/Current+Location/" + lot.Latitude + "," + lot.Longitude + "/";
+			var a   = "<a target='_blank' href='" + url + "'>" + lot.Street + "</a>";
+
+			var $tr       = $('<tr></tr>').appendTo($table);
+			var $space    = $('<td></td>').appendTo($tr).text(lot.Free);
+			var $location = $('<td></td>').appendTo($tr).html(a);
+			var $type     = $('<td></td>').appendTo($tr).text(lot.BayType);
+			var $distance = $('<td></td>').appendTo($tr).text(lot.Distance + " m");
+		}
+
+		var off     = $parking.offset();
+		var imgSize = 48;
+		$dialog.css('top', off.top + imgSize);
+		$dialog.css('left', off.left + imgSize);
+
+		$dialog.hide();
+		$('body').append($dialog);
+
 		$parking.click(function() {
-			var $dialog = $("<div id='dialog'></div>");
-			$dialog.addClass(status);
-
-			$dialog.append("<p><b>Parking rating: </b>" + rating + "</p>");
-
-			var $table = $('<table><thead><tr><th>Free Spaces</th><th class="location">Location</th><th>Type</th><th>Distance</th></tr></thead></table>').appendTo($dialog);
-
-			for (var i = 0; i < 10 && i < data.length; i++) {
-				var lot = data[i];
-				var url = "/maps/dir/Current+Location/" + lot.Latitude + "," + lot.Longitude + "/";
-				var a   = "<a target='_blank' href='" + url + "'>" + lot.Street + "</a>";
-
-				var $tr       = $('<tr></tr>').appendTo($table);
-				var $space    = $('<td></td>').appendTo($tr).text(lot.Free);
-				var $location = $('<td></td>').appendTo($tr).html(a);
-				var $type     = $('<td></td>').appendTo($tr).text(lot.BayType);
-				var $distance = $('<td></td>').appendTo($tr).text(lot.Distance + " m");
-			}
-
-			var off     = $parking.offset();
-			var imgSize = 48;
-			$dialog.css('top', off.top + imgSize);
-			$dialog.css('left', off.left + imgSize);
-
-			$('body').append($dialog);
+			$dialog.toggle();
 		});
 
 		$parking.addClass(status);
