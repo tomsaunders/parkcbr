@@ -1,0 +1,65 @@
+li.parking img {
+	width: 32px;
+	margin: 8px;
+}
+
+li.parking.green {
+	background-color: green;
+}
+
+li.parking.green img {
+	box-shadow: inset 0 0 2px 2px green;
+}
+
+li.parking.amber {
+	background-color: goldenrod;
+}
+
+li.parking.amber img {
+	box-shadow: inset 0 0 2px 2px goldenrod;
+}
+
+li.parking.red {
+	background-color: coral;
+}
+
+li.parking.red img {
+	box-shadow: inset 0 0 2px 2px coral;
+}
+
+div#dialog {
+	position: absolute;
+	height: auto;
+	width: 600px;
+	display: block;
+	background: white;
+	padding: 10px;
+	border-width: 3px;
+	border-style: solid;
+	z-index: 9999;
+}
+
+div#dialog.green {
+	border-color: green;
+}
+
+div#dialog.amber {
+	border-color: goldenrod;
+}
+
+div#dialog.red {
+	border-color: coral;
+}
+
+div#dialog table th {
+	text-align: left;
+}
+
+div#dialog table td {
+	padding: 5px;
+	width: 20%;
+}
+
+div#dialog table td.location {
+	width: 40%;
+}

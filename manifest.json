@@ -1,0 +1,23 @@
+{
+	"name": "ParkCBR",
+	"description": "Add parking lot info to Google business listings",
+	"version": "0.1",
+	"content_scripts": [
+		{
+			"matches": ["https://www.google.com.au/*"],
+			"js": ["jquery-3.1.0.min.js", "config.js", "lots.js", "tariffs.js", "park.js"]
+		},
+		{
+			"matches": ["http://www.todesire.com.au/*"],
+			"js": ["jquery-3.1.0.min.js", "config.js", "lots.js", "tariffs.js", "tod.js"],
+			"css": ["tod.css"]
+		}
+	],
+	"permissions": [
+		"https://api.smartparking.com/*"
+	],
+	"web_accessible_resources": [
+		"park.webp"
+	],
+	"manifest_version": 2
+}
