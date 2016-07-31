@@ -9,12 +9,16 @@ setTimeout(function() {
 	if ($address.length) {
 		var streetAddress = $address.find('span:last-child').text();
 
+		if (streetAddress.indexOf('ACT') === -1){
+			//this is not an address in Canberra, so we have no smart parking to look up
+			return;
+		}
+
 		var $map = $("#rhs_block [data-dtype=d3mm] a[href^='/maps/place']");
 
 		var mapURL = $map.attr('href');
 
 		var bits   = mapURL.split('/');
-		//TODO regex
 		var coords = bits[4];
 		var bits   = coords.split(',');
 
@@ -79,16 +83,11 @@ setTimeout(function() {
 					var a = "<a href='" + url + "'>" + lot.Street + "</a>";
 					msg += "<br />" + lot.Free + "/" + lot.BayCount + " free at " + a + " (" + lot.BayType + ") - " + lot.Distance + " m";
 				}
-
-				console.log('sorted data', data);
 			}
 
 			$park.find('span:last-child').html(msg);
 			$park.insertAfter($address);
 
 		}, 'json');
-
-
 	}
-
 }, 1000);
